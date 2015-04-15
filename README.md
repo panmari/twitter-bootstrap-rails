@@ -3,11 +3,9 @@ Bootstrap is a toolkit from Twitter designed to kickstart development of webapps
 
 twitter-bootstrap-rails project integrates Bootstrap CSS toolkit for Rails Asset Pipeline (Rails 4, 3.1, 3.2 are supported)
 
-
-[![Gem Version](https://badge.fury.io/rb/twitter-bootstrap-rails.png)](https://badge.fury.io/rb/twitter-bootstrap-rails.png)
-[![Build Status](https://secure.travis-ci.org/seyhunak/twitter-bootstrap-rails.png?branch=master)](https://secure.travis-ci.org/seyhunak/twitter-bootstrap-rails.png?branch=master)
-[![Dependency Status](https://gemnasium.com/seyhunak/twitter-bootstrap-rails.png?travis)](https://gemnasium.com/seyhunak/twitter-bootstrap-rails.png?travis)
-[![Code Climate](https://codeclimate.com/github/seyhunak/twitter-bootstrap-rails.png)](https://codeclimate.com/github/seyhunak/twitter-bootstrap-rails.png)
+[![Gem Version](https://badge.fury.io/rb/twitter-bootstrap-rails.svg)](http://badge.fury.io/rb/twitter-bootstrap-rails)
+[![Dependency Status](https://gemnasium.com/seyhunak/twitter-bootstrap-rails.svg?travis)](https://gemnasium.com/seyhunak/twitter-bootstrap-rails?travis)
+[![Code Climate](https://codeclimate.com/github/seyhunak/twitter-bootstrap-rails/badges/gpa.svg)](https://codeclimate.com/github/seyhunak/twitter-bootstrap-rails?branch=master)
 [![Coverage Status](https://coveralls.io/repos/seyhunak/twitter-bootstrap-rails/badge.png?branch=master)](https://coveralls.io/repos/seyhunak/twitter-bootstrap-rails/badge.png?branch=master)
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/seyhunak/twitter-bootstrap-rails/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
@@ -23,11 +21,6 @@ in this episode you will learn how to include Bootstrap into Rails application w
 [More on Twitter Bootstrap](http://railscasts.com/episodes/329-more-on-twitter-bootstrap "More on Twitter Bootstrap")
 in this episode continues on the Bootstrap project showing how to display flash messages, add form validations with SimpleForm, customize layout with variables, and switch to using Sass.
 (Note: This episode is pro episode)
-
-
-## Example Application
-An example application is available at [toadkicker/teststrap](https://github.com/toadkicker/teststrap). You can view it running on heroku [here.](http://teststrap.herokuapp.com/) Contributions welcome.
-
 
 ## Installing the Gem
 
@@ -293,19 +286,21 @@ You can create modals easily using the following example. The header, body, and 
 The href of the button to launch the modal must match the id of the modal dialog. It also accepts a block for the header, body, and footer. If you are getting a complaint about the modal_helper unable to merge a hash it is due to this.
 
 ````
-<%= content_tag :a, "Modal", :href => "#modal", :class => 'btn', :data => {:toggle => 'modal'} %>
+<%= content_tag :a, "Modal", href: "#modal", class: 'btn', data: {toggle: 'modal'} %>
 
-<%= modal_dialog :id => "modal",
-         :header => { :show_close => true, :dismiss => 'modal', :title => 'Modal header' },
-         :body   => { :content => 'This is the body' },
-         :footer => { :content => content_tag(:button, 'Save', :class => 'btn') } %>
+<%= modal_dialog id: "modal",
+         header: { show_close: true, dismiss: 'modal', title: 'Modal header' },
+         body:   { content: 'This is the body' },
+         footer: { content: content_tag(:button, 'Save', class: 'btn') } %>
+
 ````
 
 ### Navbar Helper
 It should let you write things like:
 
 ````
-<%= nav_bar :fixed => :top, :brand => "Fashionable Clicheizr 2.0", :responsive => true do %>
+
+<%= nav_bar fixed: :top, brand: "Fashionable Clicheizr 2.0", responsive: true do %>
     <%= menu_group do %>
         <%= menu_item "Home", root_path %>
         <%= menu_divider %>
@@ -320,11 +315,11 @@ It should let you write things like:
         <%= menu_item "About Us", about_us_path %>
         <%= menu_item "Contact", contact_path %>
     <% end %>
-    <%= menu_group :pull => :right do %>
+    <%= menu_group pull: :right do %>
         <% if current_user %>
             <%= menu_item "Log Out", log_out_path %>
         <% else %>
-            <%= form_for @user, :url => session_path(:user), html => {:class=> "navbar-form pull-right"} do |f| -%>
+            <%= form_for @user, url: session_path(:user), html => {class: "navbar-form pull-right"} do |f| -%>
               <p><%= f.text_field :email %></p>
               <p><%= f.password_field :password %></p>
               <p><%= f.submit "Sign in" %></p>
@@ -332,6 +327,8 @@ It should let you write things like:
         <% end %>
     <% end %>
 <% end %>
+
+
 ````
 
 ### Navbar scaffolding
@@ -339,7 +336,7 @@ It should let you write things like:
 In your view file (most likely application.html.erb) to get a basic navbar set up you need to do this:
 
 ````
-<%= nav_bar  %>
+<%= nav_bar %>
 ````
 
 Which will render:
@@ -355,7 +352,7 @@ Which will render:
 If you want the navbar to stick to the top of the screen, pass in the option like this:
 
 ````
-<%= nav_bar :fixed => :top  %>
+<%= nav_bar fixed: :top  %>
 ````
 
 To render:
@@ -370,7 +367,7 @@ To render:
 If you want a full-width navbar that scrolls away with the page, pass in the option like this:
 
 ````
-<%= nav_bar :static => :top  %>
+<%= nav_bar static: :top  %>
 ````
 
 To render:
@@ -386,7 +383,7 @@ To render:
 Add the name of your site on the left hand edge of the navbar. By default, it will link to root_url. Passing a brand_link option will set the url to whatever you want.
 
 ````
-<%= nav_bar :brand => "We're sooo web 2.0alizr", :brand_link => account_dashboard_path  %>
+<%= nav_bar brand: "We're sooo web 2.0alizr", brand_link: account_dashboard_path  %>
 ````
 
 Which will render:
@@ -405,7 +402,7 @@ Which will render:
 If you want the responsive version of the navbar to work (One that shrinks down on mobile devices etc.), you need to pass this option:
 
 ````
-<%= nav_bar :responsive => true %>
+<%= nav_bar responsive: true %>
 ````
 Which renders the html quite differently:
 
@@ -441,7 +438,8 @@ menu_group only takes one argument - :pull - this moves the group left or right 
 menu_item generates a link wrapped in an li tag. It takes two arguments and an options hash. The first argument is the name (the text that will appear in the menu), and the path (which defaults to "#" if left blank). The rest of the options are passed straight through to the link_to helper, so that you can add classes, ids, methods or data tags etc.
 
 ````
-<%= nav_bar :fixed => :top, :brand => "Ninety Ten" do %>
+
+<%= nav_bar fixed: :top, brand: "Ninety Ten" do %>
     <%= menu_group do %>
         <%= menu_item "Home", root_path %>
         <%= menu_item "About Us", about_us_path %>
@@ -450,9 +448,9 @@ menu_item generates a link wrapped in an li tag. It takes two arguments and an o
     <% if current_user %>
         <%= menu_item "Log Out", log_out_path %>
     <% else %>
-        <%= menu_group :pull => :right do %>
+        <%= menu_group pull: :right do %>
             <%= menu_item "Sign Up", registration_path %>
-            <%= form_for @user, :url => session_path(:user) do |f| -%>
+            <%= form_for @user, url: session_path(:user) do |f| -%>
               <p><%= f.text_field :email %></p>
               <p><%= f.password_field :password %></p>
               <p><%= f.submit "Sign in" %></p>
@@ -460,6 +458,7 @@ menu_item generates a link wrapped in an li tag. It takes two arguments and an o
         <% end %>
     <% end %>
 <% end %>
+
 ````
 
 ### Dropdown menus
@@ -480,6 +479,7 @@ For multi-level list options, where it makes logical sense to group menu items, 
     <%= menu_item "About Us", about_us_path %>
     <%= menu_item "Contact", contact_path %>
 <% end %>
+
 ````
 
 ### Dividers
@@ -487,7 +487,8 @@ For multi-level list options, where it makes logical sense to group menu items, 
 Dividers are just vertical bars that visually separate logically disparate groups of menu items
 
 ````
-<%= nav_bar :fixed => :bottom do %>
+
+<%= nav_bar fixed: :bottom do %>
     <%= menu_item "Home", root_path %>
     <%= menu_item "About Us", about_us_path %>
     <%= menu_item "Contact", contact_path %>
@@ -498,6 +499,7 @@ Dividers are just vertical bars that visually separate logically disparate group
     <%= menu_item "Account Settings", edit_user_account_path(current_user, @account) %>
     <%= menu_item "Log Out", log_out_path %>
 <% end %>
+
 ````
 
 ### Forms in navbar
@@ -531,18 +533,19 @@ To change the size of the form fields, use .span2 (or however many span widths y
 You can shift things to the left or the right across the nav bar. It's easiest to do this on grouped menu items:
 
 ````
-<%= nav_bar :fixed => :bottom do %>
+<%= nav_bar fixed: :bottom do %>
     <% menu_group do %>
         <%= menu_item "Home", root_path %>
         <%= menu_item "About Us", about_us_path %>
         <%= menu_item "Contact", contact_path %>
     <% end %>
-    <% menu_group :pull => :right do %>
+    <% menu_group pull: :right do %>
         <%= menu_item "Edit Profile", edit_user_path(current_user) %>
         <%= menu_item "Account Settings", edit_user_account_path(current_user, @account) %>
         <%= menu_item "Log Out", log_out_path %>
     <% end %>
 <% end %>
+
 ````
 
 ### Text in the navbar
@@ -550,11 +553,12 @@ You can shift things to the left or the right across the nav bar. It's easiest t
 If you want to put regular plain text in the navbar anywhere, you do it like this:
 
 ````
-<%= nav_bar :brand => "Apple" do %>
+<%= nav_bar brand: "Apple" do %>
     <%= menu_text "We make shiny things" %>
     <%= menu_item "Home", root_path %>
     <%= menu_item "About Us", about_us_path %>
 <% end %>
+
 ````
 It also takes the :pull option to drag it to the left or right.
 
@@ -573,7 +577,9 @@ You can also specify a divider for it like this: `<%= render_breadcrumbs('>') %>
 
 Full example:
 ```ruby
-render_breadcrumbs(" / ", { :class => '', :item_class => '', :divider_class => '', :active_class => 'active' })
+
+render_breadcrumbs(" / ", { class: '', item_class: '', divider_class: '', active_class: 'active' })
+
 ```
 
 ```ruby
@@ -612,10 +618,10 @@ Glyph:
 ```erb
 <%= glyph(:pencil) %> <i class="icon-pencil"></i>
 
-<%= glyph(:pencil, {:tag => :span}) %> <span class="icon-pencil"></span>
+<%= glyph(:pencil, {tag: :span}) %> <span class="icon-pencil"></span>
 ```
 
-###I18n Internationalization Support
+### I18n Internationalization Support
 The installer creates an English translation file for you and copies it to config/locales/en.bootstrap.yml
 
 
@@ -623,86 +629,10 @@ NOTE: If you are using Devise in your project, you must have a devise locale fil
 for handling flash messages, even if those messages are blank. See https://github.com/plataformatec/devise/wiki/I18n
 
 ## Changelog
-<ul>
-  <li>Version 0.0.5 deprecated</li>
-  <li>Asset files updated to latest and removed version numbers</li>
-  <li>Implemented Less::Rails Railtie to use with LESS</li>
-  <li>Fixed railtie to only initialize Less when installed</li>
-  <li>New branch for the static version of Bootstrap (w/o Less) - check static branch</li>
-  <li>Added path to support heroku deploy</li>
-  <li>Rake precompile issue fixed</li>
-  <li>Updated asset files to 1.4.0</li>
-  <li>Updated dependency less-rails (now requires 2.1.0)</li>
-  <li>Added generators</li>
-  <li>Fixed generators</li>
-  <li>Fixed class name conflicts from (bootstrap.js.coffee)</li>
-  <li>Fixed jquery-rails gem version dependency</li>
-  <li>Updated asset files</li>
-  <li>Added new generators (install, layout and themed)</li>
-  <li>Compatibility to Rails 3.2</li>
-  <li>Transitioning to 2.0</li>
-  <li>Released gem v.2.0rc0</li>
-  <li>Added Haml and Slim support</li>
-  <li>Added Responsive layout support</li>
-  <li>Fixes and release 2.0.0</li>
-  <li>Updated to v2.0.1, versioned v2.0.1.0</li>
-  <li>Released gem v.2.0.3</li>
-  <li>Released gem v.2.0.4</li>
-  <li>Released gem v.2.0.5</li>
-  <li>Added SimpleForm support</li>
-  <li>Added FontAwesome support</li>
-  <li>Released gem v.2.0.6</li>
-  <li>Released gem v.2.0.7</li>
-  <li>Released gem v.2.0.8</li>
-  <li>Released gem v.2.0.9 (Bootstrap 2.0.4 and FontAwesome 2.0 support)</li>
-  <li>Released gem v.2.1.0 (JRuby support)</li>
-  <li>Released gem v.2.1.1 (minor fixes)</li>
-  <li>Flash block message helper added</li>
-  <li>Released gem v.2.1.2 (minor fixes and updated to Twitter Bootstrap 2.1.0)</li>
-  <li>Released gem v.2.1.3 (minor fixes and updated to Twitter Bootstrap 2.1.1)</li>
-  <li>Released gem v.2.1.4 (minor fixes)</li>
-  <li>Released gem v.2.1.5 (minor fixes, install generator detects JavaScript template engine, updated to Twitter Bootstrap 2.2.1)</li>
-  <li>Released gem v.2.1.6 (minor fixes)</li>
-  <li>Added static stylesheets support</li>
-  <li>Released gem v.2.1.8 and updated to Twitter Bootstrap 2.2.2</li>
-  <li>Released gem v.2.1.9</li>
-  <li>Released gem v.2.2.0 (Font Awesome 3)</li>
-  <li>Released gem v.2.2.1 (minor fixes and updates)</li>
-  <li>Released gem v.2.2.2 (Bootstrap 2.3.0)</li>
-  <li>Released gem v.2.2.3 (Minor fixes)</li>
-  <li>Released gem v.2.2.4 (Minor fixes)</li>
-  <li>Released gem v.2.2.5 (Bootstrap 2.3.1)</li>
-  <li>Released gem v.2.2.6</li>
-  <li>Released gem v.2.2.7 (Fixes)</li>
-  <li>Releases gem v.2.2.8</li>
-</ul>
-
+Please see CHANGELOG.md for more details
 
 ## Contributors & Patches & Forks
-<ul>
-  <li>Ben Lovell</li>
-  <li>Daniel Morris</li>
-  <li>Bradly Feeley</li>
-  <li>Guilherme Moreira</li>
-  <li>Alex Behar</li>
-  <li>Brandon Keene</li>
-  <li>Anthony Corcutt</li>
-  <li>Colin Warren</li>
-  <li>Giovanni Cappellotto</li>
-  <li>Masakuni Kato</li>
-  <li>Gudleik Rasch</li>
-  <li>Thomas Volkmar Worm</li>
-  <li>Thiago Almeida</li>
-  <li>Sébastien Grosjean</li>
-  <li>Nick DeSteffen</li>
-  <li>Christian Joudrey</li>
-  <li>Todd Baur</li>
-  <li>Leonid Shevtsov</li>
-</ul>
-
-### Contribute and Earn Bitcoin
-Make commits and get tips for it
-[![tip for next commit](http://tip4commit.com/projects/13.svg)](http://tip4commit.com/projects/13)
+Please see CONTRIBUTERS.md for contributors list
 
 
 ## About Me
